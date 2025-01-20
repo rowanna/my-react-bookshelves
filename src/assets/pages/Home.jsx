@@ -1,14 +1,19 @@
 import Container from "../components/Container";
-// import
+import Layout from "../components/Laout";
+import MyBookShelvesList from "../components/MyBookShelvesList";
+import CreatedPerson from "../components/CreatedPerson";
 
 const Home = () => {
   return (
     <>
-      <Container title="나만의 책장">
-        <div>현재 읽고있는 책 : </div>
-        <input />
-      </Container>
-      <Container title="만든이"></Container>
+      <Layout>
+        <Container title="나만의 책장">
+          <MyBookShelvesList></MyBookShelvesList>
+        </Container>
+        <Container title="만든이">
+          <CreatedPerson></CreatedPerson>
+        </Container>
+      </Layout>
     </>
   );
 };

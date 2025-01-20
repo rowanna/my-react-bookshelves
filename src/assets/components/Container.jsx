@@ -1,7 +1,10 @@
-const Container = () => {
+const Container = ({ title, children }) => {
   return (
     <>
-      <div>container</div>
+      <div className="container">
+        <p>{title}</p>
+        {children}
+      </div>
     </>
   );
 };
