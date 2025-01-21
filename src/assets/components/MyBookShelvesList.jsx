@@ -1,11 +1,14 @@
-import { useContext, createContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import books from "../../mock/book";
 import { readingBookContext } from "../../contexts/readingBookContexts";
+import { bookListContexts } from "../../contexts/bookListContexts";
 import { Link } from "react-router-dom";
+import ReadingBookDisplay from "../components/ReadingBookDisplay";
+import SearchBookInput from "../components/SearchBookInput";
 
 function MyBookShelvesList() {
   const { readingBook, setReadingBook } = useContext(readingBookContext);
-
+  const { bookList, setBookList } = useContext(bookListContexts);
   const handleClick = (e) => {
     e.preventDefault();
     const parentElText = e.target.parentElement.innerText;
@@ -18,14 +21,17 @@ function MyBookShelvesList() {
   useEffect(() => {
     localStorage.getItem("readingBook") &&
       setReadingBook(localStorage.getItem("readingBook"));
+
+    setBookList(books);
   }, []);
 
   return (
     <>
-      <div>현재 읽고있는 책 : {readingBook}</div>
-      <input />
+      <ReadingBookDisplay readingBook={readingBook} />
+      <SearchBookInput />
+
       <ul>
-        {books.map(({ title, author, id }) => (
+        {bookList.map(({ title, author, id }) => (
           <li key={id}>
             <Link to={`/detail/${id}`}>
               {title}-{author}

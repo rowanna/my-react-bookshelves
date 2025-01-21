@@ -1,6 +1,6 @@
 import books from "../../mock/book";
 import { useLocation } from "react-router-dom";
-import Layout from "../components/Laout";
+import Layout from "../components/Layout/Layout";
 
 const DetailPage = () => {
   const urlParameter = Number(useLocation().pathname.split("/")[2]);
