@@ -1,16 +1,17 @@
 import { useContext, useRef } from "react";
 import { bookListContexts } from "../../contexts/bookListContexts";
-
+import books from "../../mock/book";
 function SearchBookInput() {
+  const booksData = [...books];
   const inputRef = useRef("");
-  const { bookList, setBookList } = useContext(bookListContexts);
+  const { setBookList } = useContext(bookListContexts);
 
   function handleKeyupEvent(e) {
     const searchWord = inputRef.current.value;
 
     if (e.key !== "Enter" || !searchWord.trim()) return;
 
-    const searchedBookList = bookList.filter(({ title }) =>
+    const searchedBookList = booksData.filter(({ title }) =>
       title.includes(searchWord)
     );
     setBookList(searchedBookList);
