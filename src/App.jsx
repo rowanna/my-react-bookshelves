@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./assets/pages/Home";
 import CustomerPage from "./assets/pages/CustomerPage";
 import DetailPage from "./assets/pages/DetailPage";
+import books from "./mock/book";
 import "./App.css";
 // import
 
@@ -11,7 +12,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} /> {/* 메인 페이지 */}
         <Route path="/customer" element={<CustomerPage />} />{" "}
-        <Route path="/detail" element={<DetailPage />} />{" "}
+        {books.map(({ id }) => (
+          <Route key="id" path={`/detail/${id}`} element={<DetailPage />} />
+        ))}
       </Routes>
     </Router>
   );
