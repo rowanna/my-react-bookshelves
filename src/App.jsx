@@ -6,9 +6,11 @@ import books from "./mock/book";
 import "./App.css";
 // import
 
+const projectBasePath = "/my-react-bookshelves"; // 기본 경로를 변수로 정의
+
 const App = () => {
   return (
-    <Router>
+    <Router basename={projectBasePath}>
       <Routes>
         <Route path="/" element={<Home />} /> {/* 메인 페이지 */}
         <Route path="/customer" element={<CustomerPage />} />{" "}
