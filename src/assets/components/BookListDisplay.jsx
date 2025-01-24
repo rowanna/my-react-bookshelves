@@ -1,10 +1,25 @@
 import { bookListContexts } from "../../contexts/bookListContexts";
-import { useContext } from "react";
+import { readingBookContext } from "../../contexts/readingBookContexts";
+import { useContext, memo, useEffect } from "react";
 import { Link } from "react-router-dom";
+import books from "../../mock/book";
 
-function BookListDisplay({ onClick }) {
+const BookListDisplay = memo(function BookListDisplay() {
+  const { setReadingBook } = useContext(readingBookContext);
   const { bookList } = useContext(bookListContexts);
+  const { setBookList } = useContext(bookListContexts);
 
+  useEffect(() => {
+    setBookList(books);
+  }, []);
+  const handleClick = (e) => {
+    e.preventDefault();
+    const parentElText = e.target.parentElement.innerText;
+    const selectedBookTitle = parentElText.split("-")[0];
+
+    setReadingBook(selectedBookTitle);
+    localStorage.setItem("readingBook", selectedBookTitle);
+  };
   return (
     <>
       <ul>
@@ -13,7 +28,7 @@ function BookListDisplay({ onClick }) {
             <Link to={`/detail/${id}`}>
               {title}-{author}
               <button
-                onClick={onClick}
+                onClick={handleClick}
                 style={{ padding: "0.2rem 0.4rem", marginLeft: 4 }}
               >
                 읽기
@@ -24,6 +39,6 @@ function BookListDisplay({ onClick }) {
       </ul>
     </>
   );
-}
+});
 
 export default BookListDisplay;
