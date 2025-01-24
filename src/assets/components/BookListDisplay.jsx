@@ -1,6 +1,6 @@
 import { bookListContexts } from "../../contexts/bookListContexts";
 import { readingBookContext } from "../../contexts/readingBookContexts";
-import { useContext, memo, useEffect } from "react";
+import { useContext, memo, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import books from "../../mock/book";
 
@@ -12,14 +12,14 @@ const BookListDisplay = memo(function BookListDisplay() {
   useEffect(() => {
     setBookList(books);
   }, []);
-  const handleClick = (e) => {
+  const handleClick = useCallback((e) => {
     e.preventDefault();
     const parentElText = e.target.parentElement.innerText;
     const selectedBookTitle = parentElText.split("-")[0];
 
     setReadingBook(selectedBookTitle);
     localStorage.setItem("readingBook", selectedBookTitle);
-  };
+  });
   return (
     <>
       <ul>
